@@ -3,7 +3,12 @@
 // Override via NEXT_PUBLIC_CHAINGRAPH_URL to point at a more powerful instance.
 export const CHAINGRAPH_URL =
   process.env.NEXT_PUBLIC_CHAINGRAPH_URL ?? "https://gql.chaingraph.pat.mn/v1/graphql";
-export const IPFS_GATEWAY = "https://dweb.link/ipfs/";
+// dweb.link, along with ipfs.io, w3s.link and nftstorage.link, is one backend behind
+// Cloudflare bot management: on a challenged connection every request gets a 403
+// challenge page, so metadata fetches and token icons fail. filebase serves the
+// content directly with CORS headers on the response instead of redirecting to a
+// subdomain gateway, which a fetch of the BCMR JSON needs.
+export const IPFS_GATEWAY = "https://ipfs.filebase.io/ipfs/";
 export const BLOCK_EXPLORER_URL = "https://explorer.bch.ninja/tx/";
 export const OTR_REGISTRY_URL = "https://otr.cash/.well-known/bitcoin-cash-metadata-registry.json";
 export const ELECTRUM_MAINNET = "electrum.imaginary.cash";
